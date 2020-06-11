@@ -1,11 +1,13 @@
 from tkinter import *
 
-root=Tk()
+root = Tk()
 root.geometry('500x400+200+100')
 root.title('Babos')
 
 person0 = []
 check = []
+
+person_out = []     #Список для отображения введенных данных
 
 name = StringVar()
 cash = StringVar()
@@ -23,14 +25,23 @@ cash_entry.grid(row=2, column=1, padx=5, pady=5)
 
 
 def finished():
+
+    consol = ""
+
     check.append(float(cash.get()))
     person0.append(name.get())
+    person_out.append(name.get() + " заплатил " + cash.get())
     print(person0)
     print(check)
+
+    for i in person_out:
+        consol += (i + '\n')
+
     name_entry.delete(0, END)
     cash_entry.delete(0, END)
+    out_label.config(text = consol)
 
-button1=Button(root, text='Добавить участника', bg = 'pink')
+button1=Button(root, text = 'Подсчитать', bg = 'pink')
 button1.grid(row=0, column=1)
 
 #button1.bind('<Button-1>', added)
@@ -40,10 +51,7 @@ button1.grid(row=0, column=1)
 button2 = Button(root, text='внести данные', bg = 'yellow', command = finished)
 button2.grid(row=3, column=1)
 
-
-#consol = Label(root, bg='#b8b894', fg='white', text=person0)
-
-out_label = Label(textvariable = name, wraplength=250, bg = 'pink')
+out_label = Label(wraplength=250)
 out_label.grid(row=4, column=1, padx=5, pady=5)
 
 
