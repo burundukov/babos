@@ -1,6 +1,7 @@
 from tkinter import *
 
 root = Tk()
+root.iconbitmap('icon.ico')
 root.geometry('420x400+200+100')
 root.title('Babos')
 
@@ -26,8 +27,8 @@ cash_entry.grid(row=2, column=1, padx=5, pady=5)
 
 def finished():
 
+    global consol
     consol = ""
-
     check.append(float(cash.get()))
     person0.append(name.get())
     person_out.append(name.get() + " заплатил " + cash.get())
@@ -40,6 +41,7 @@ def finished():
     name_entry.delete(0, END)
     cash_entry.delete(0, END)
     out_label.config(text = consol)
+    consol = ""
 
     name_entry.focus_set()
 
@@ -91,12 +93,14 @@ def calculate():
   consol_2 = f"Средний чек {first} рублей" + '\n' + '\n' + '\n'
   for i in result:
     consol_2 += (i + '\n')
-  out_label.config(text=consol_2)
+  out_label.config(text = consol_2)
 
 def clear():
     person0.clear()
     check.clear()
-    consol = ""
+    person_out.clear()
+    out_label.config(text=consol)
+
 
 button1 = Button(root, text = 'Подсчитать', bg = 'pink', command = calculate)
 button1.grid(row=0, column=1)
